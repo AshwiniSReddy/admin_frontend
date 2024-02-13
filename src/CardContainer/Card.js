@@ -540,7 +540,7 @@ const CardsContainer = () => {
         // Assuming all other fields are already being handled correctly
         data.append(key, card[key]);
       });
-
+      
       // Capture and append 'fromDate', 'toDate', and 'time' values directly from the form inputs
       // These selectors might need to be adjusted based on your actual form structure
       const fromDateInput = document.querySelector(`input[name="fromDate"][data-index="${index}"]`);
@@ -561,6 +561,7 @@ const CardsContainer = () => {
 
       try {
         // Submit the FormData
+        console.log(data)
         const response = await axios.post('http://localhost:5000/api/admin', data, {
           headers: {
             'Content-Type': 'multipart/form-data',

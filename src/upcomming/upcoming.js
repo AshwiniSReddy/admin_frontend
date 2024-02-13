@@ -42,12 +42,13 @@ const UpcomingEvents = () => {
 
     const handleDelete = async (eventId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/admin/${eventId}`);
+            await axios.delete(`http://localhost:5000/api/delete/${eventId}`);
             fetchEvents(); // Refresh the events list after deletion
             if (editingId === eventId) {
                 setEditingId(null); // Reset editing state if the deleted event was being edited
             }
         } catch (error) {
+            
             console.error('Error deleting event:', error);
         }
     };
@@ -89,16 +90,25 @@ const UpcomingEvents = () => {
         const updatedEventData = editedEvents[eventId];
         const data = new FormData();
     
-        // Iterate over updatedEventData to append non-file values.
-        Object.entries(updatedEventData).forEach(([key, value]) => {
-            // Check if the value is a file to append it as a file
-            if (value instanceof File) {
-                data.append(key, value);
-            } else {
-                // For non-file fields, directly append the value
-                data.append(key, value);
-            }
-        });
+        // // Iterate over updatedEventData to append non-file values.
+        // Object.entries(updatedEventData).forEach(([key, value]) => {
+        //     // Check if the value is a file to append it as a file
+        //     if (value instanceof File) {
+        //         data.append(key, value);
+        //         console.log(key,value)
+        //     } else {
+        //         // For non-file fields, directly append the value
+        //         console.log(key,value)
+        //         data.append(key, value);
+        //     }
+        // });
+
+
+        for (const key in updatedEventData) {
+           
+            data.append(key, updatedEventData[key]);
+          }
+        data.append("sjhsj","hsh")
        console.log(data,"data")
         // Special handling for date and time fields
         // Assuming 'fromDate' and 'toDate' are stored in ISO string format or similar in editedEvents
@@ -108,6 +118,7 @@ const UpcomingEvents = () => {
             // Append 'fromDate' as is or convert/format it as needed
             data.append('fromDate', updatedEventData.fromDate);
         }
+        
     
         if (updatedEventData.toDate) {
             // Append 'toDate' as is or convert/format it as needed
