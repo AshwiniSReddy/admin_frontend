@@ -1,7 +1,7 @@
 import './App.css';
 import axios from "axios";
-import {  Navigate } from "react-router-dom";
-import { useState,useEffect } from 'react';
+import { Navigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
 import EventForm from './Admin/Admin';
 import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
@@ -29,25 +29,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
-            exact
-            path="/"
-            element={user ? <EventForm user={user} /> : <Navigate to="/login" />}
-          />
-          {/* <Route path="/" element={<Register />} /> */}
-          <Route path="/login" element={<Login />} />
-          <Route
-            exact
-            path="/login"
-            element={user ? <Navigate to="/" /> : <Login />}
-          />
-          {/* <Route path="/Dashboard" element={<EventForm />} /> */}
-          <Route
-					path="/signup"
-					element={user ? <Navigate to="/" /> : <Signup />}
-				/>
+          <Route path="/" element={user ? <EventForm user={user} /> : <Navigate to="/login" />} />
+          <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+          <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
         </Routes>
       </BrowserRouter>
+
     </div>
   );
 }

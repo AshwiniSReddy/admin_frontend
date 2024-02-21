@@ -252,7 +252,7 @@ const UpcomingEvents = () => {
                         <label>Photo/Video:</label>
                         <input
                             type="file"
-                            value={editingId === event._id ? editedEvents[event._id]?.photoVideo || '' : event.photoVideo}
+                            // value={editingId === event._id ? editedEvents[event._id]?.photoVideo || '' : event.photoVideo}
                             onChange={(e) => handleFileChange(event._id, 'photoVideo', e.target.files)}
                             disabled={editingId !== event._id}
                         />

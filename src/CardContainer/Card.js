@@ -379,11 +379,25 @@ import './Card.css'
 // Define the Card component
 const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing }) => {
   // Handle input changes and update the state in the parent component
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
 
-    updateCard(index, name, value);
+  //   updateCard(index, name, value);
+  // };
+  
+  const handleChange = (e) => {
+    const { name, type } = e.target;
+    if (type === 'file') {
+      // For file inputs, directly use the file object
+      const file = e.target.files[0]; // Get the first file
+      updateCard(index, name, file); // Update the state
+    } else {
+      // For all other inputs, proceed as usual
+      const value = e.target.value;
+      updateCard(index, name, value);
+    }
   };
+  
 
   return (
     <form className="card" >
@@ -454,7 +468,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           type="file"
           name="photoVideo"
           placeholder="Photo/Video URL"
-          value={cardData.photoVideo}
+          // value={cardData.photoVideo}
           onChange={handleChange}
           data-index={index}
           disabled={cardData.isSaved}
