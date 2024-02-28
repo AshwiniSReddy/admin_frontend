@@ -48,7 +48,7 @@ const UpcomingEvents = () => {
                 setEditingId(null); // Reset editing state if the deleted event was being edited
             }
         } catch (error) {
-            
+
             console.error('Error deleting event:', error);
         }
     };
@@ -56,7 +56,7 @@ const UpcomingEvents = () => {
     // const handleSave = async (eventId) => {
     //     const updatedEventData = editedEvents[eventId];
     //     const data = new FormData();
-    
+
     //     Object.entries(updatedEventData).forEach(([key, value]) => {
     //         if (value instanceof File) {
     //             data.append(key, value);
@@ -68,7 +68,7 @@ const UpcomingEvents = () => {
     //             data.append(key, value);
     //         }
     //     });
-    
+
     //     try {
     //         const response = await axios.patch(`http://localhost:5000/api/edit/${eventId}`, data);
     //         console.log(response.data);
@@ -83,13 +83,13 @@ const UpcomingEvents = () => {
     //         console.error('Error updating event:', error);
     //     }
     // };
-    
+
 
 
     const handleSave = async (eventId) => {
         const updatedEventData = editedEvents[eventId];
         const data = new FormData();
-    
+
         // // Iterate over updatedEventData to append non-file values.
         // Object.entries(updatedEventData).forEach(([key, value]) => {
         //     // Check if the value is a file to append it as a file
@@ -105,38 +105,38 @@ const UpcomingEvents = () => {
 
 
         for (const key in updatedEventData) {
-           
+
             data.append(key, updatedEventData[key]);
-          }
-        data.append("sjhsj","hsh")
-       console.log(data,"data")
+        }
+        data.append("sjhsj", "hsh")
+        console.log(data, "data")
         // Special handling for date and time fields
         // Assuming 'fromDate' and 'toDate' are stored in ISO string format or similar in editedEvents
         // and 'time' is stored in 'HH:mm' format.
-    
+
         if (updatedEventData.fromDate) {
             // Append 'fromDate' as is or convert/format it as needed
             data.append('fromDate', updatedEventData.fromDate);
         }
-        
-    
+
+
         if (updatedEventData.toDate) {
             // Append 'toDate' as is or convert/format it as needed
             data.append('toDate', updatedEventData.toDate);
         }
-    
+
         if (updatedEventData.time) {
             // Append 'time' as is
             data.append('time', updatedEventData.time);
         }
-    
+
         try {
             const response = await axios.patch(`http://localhost:5000/api/edit/${eventId}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-    
+
             console.log(response.data);
             await fetchEvents();
             setEditingId(null);
@@ -149,7 +149,7 @@ const UpcomingEvents = () => {
             console.error('Error updating event:', error);
         }
     };
-    
+
 
     // const handleFileChange = (eventId, fieldName, files) => {
     //     handleFieldChange(eventId, fieldName, files, true); // Pass true to indicate this is a file
@@ -250,18 +250,31 @@ const UpcomingEvents = () => {
                     </div>
                     <div className='cardInner'>
                         <label>Photo/Video:</label>
+                        {/* Display the file URL if available and in edit mode */}
+                        {editingId === event._id && editedEvents[event._id]?.photoVideoName ? (
+                            <div>
+                                {/* Display the file URL as a clickable link */}
+                                <a href={editedEvents[event._id].photoVideoName} target="_blank" rel="noopener noreferrer">View Current File</a>
+                            </div>
+                        ) : null}
+
+                        {/* Always show the file input to allow file upload; enable it during edit mode */}
                         <input
                             type="file"
-                            // value={editingId === event._id ? editedEvents[event._id]?.photoVideo || '' : event.photoVideo}
                             onChange={(e) => handleFileChange(event._id, 'photoVideo', e.target.files)}
                             disabled={editingId !== event._id}
+                            style={{ display: editingId === event._id ? 'block' : 'none' }} // Optionally hide when not editing
                         />
-                        {/* // Display the file name if available in the state */}
-                        {editingId === event._id && editedEvents[event._id]?.photoVideo && (
-                            <div>Selected file: {editedEvents[event._id].photoVideo}</div>
-                        )}
 
+                        {/* Optionally, display a message if a file is already linked but not in edit mode */}
+                        {editingId !== event._id && event.photoVideo && (
+                            <div>
+                                <a href={event.photoVideo} target="_blank" rel="noopener noreferrer">View Uploaded File</a>
+                            </div>
+                        )}
                     </div>
+
+
                     <div className='cardInner'>
                         <label >Bookmyshow:</label>
                         <input

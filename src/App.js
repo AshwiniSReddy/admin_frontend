@@ -5,13 +5,14 @@ import { useState, useEffect } from 'react';
 import EventForm from './Admin/Admin';
 import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
+import  { createContext, useContext } from 'react';
 
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(null);
-
+  
   const getUser = async () => {
     try {
       const url = `http://localhost:5000/auth/login/success`;

@@ -471,7 +471,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           // value={cardData.photoVideo}
           onChange={handleChange}
           data-index={index}
-          disabled={cardData.isSaved}
+          disabled={!isEditing && cardData.isSaved} // Enable file input only in edit mode
         />
       </div>
       <div className='cardInner'>
@@ -532,7 +532,7 @@ const CardsContainer = () => {
     // console.log(index)
     setEditingIndex(index); // Mark this card as being edited
   };
-
+ 
  
 
   async function fetchUpcomingEventsWithAxios() {
@@ -540,6 +540,7 @@ const CardsContainer = () => {
       const response = await axios.get('http://localhost:5000/api/recentEvents');
       console.log(response.data);
       // Process the data
+      
     } catch (error) {
       console.error('There was an error:', error);
     }
@@ -589,7 +590,7 @@ const CardsContainer = () => {
             index === itemIndex ? { ...item, isSaved: true } : item
           )
         );
-
+        window.location.reload();
       } catch (error) {
         console.error('There was an error submitting the form!', error);
         // Handle the submission error
