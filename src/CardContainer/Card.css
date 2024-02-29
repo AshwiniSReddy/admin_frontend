@@ -19,12 +19,15 @@
     width: 60%;
     /* height: 30%; */
     padding: 2rem;
-    border:2px solid black;
+    /* border:2px solid black; */
     display: flex;
     flex-direction: column;
     gap:10px;
     justify-content: center;
     align-items: center;
+    background: #272c4a;
+    border-radius: 5%;
+
 }
 
 .cardInner{
@@ -35,8 +38,53 @@
 }
 label{
     width: 20%;
+    pointer-events: none;
+    transition: 0.2s;
 }
 
 input{
     width: 50%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 7px 0px;
 }
+
+input::placeholder{
+    padding: 10px;
+}
+
+select{
+    border-radius: 5px;
+}
+
+
+textarea{
+    border-radius: 5px;
+}
+
+textarea::placeholder{
+    padding: 10px;
+}
+
+.card button{
+    margin: 20px;
+    border: none;
+   
+    outline: none;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+
+}
+
+
+@media only screen and (max-width: 440px) {
+      input{
+        width: 50%;
+      }
+      .card{
+        width: 90%;
+      }
+  }
+

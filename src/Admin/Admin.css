@@ -1,43 +1,54 @@
-.Admin{
+.Admin {
     width: 100vw;
     height: 100vh;
-   
+
     box-sizing: border-box;
     overflow-y: auto;
-    overflow-x:hidden;
+    overflow-x: hidden;
 
 }
 
-.AdminCard{
+.AdminCard {
     width: 100%;
-    height:100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background: #1b203d;
+    color: white;
 
 }
 
-.header{
+.header {
+    padding: 1%;
+
     width: 100%;
     height: 20%;
     display: flex;
-    gap:5%;
+    gap: 5%;
     justify-content: center;
     align-items: center;
     position: sticky;
-   
+    background: #272c4a;
+    cursor: pointer;
+
+
 }
 
-.section{
+.section {
     height: 100%;
     width: 100%;
+
+    background: #1b203d;
+
 }
 
-.upcomming_events{
+.upcomming_events {
+    background: #1b203d;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:20px;
+    gap: 20px;
 }
