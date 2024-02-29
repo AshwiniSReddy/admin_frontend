@@ -537,7 +537,7 @@ const CardsContainer = () => {
 
   async function fetchUpcomingEventsWithAxios() {
     try {
-      const response = await axios.get('http://localhost:5000/api/recentEvents');
+      const response = await axios.get('http://13.233.173.240/api/recentEvents');
       console.log(response.data);
       // Process the data
       
@@ -577,7 +577,7 @@ const CardsContainer = () => {
       try {
         // Submit the FormData
         console.log(data)
-        const response = await axios.post('http://localhost:5000/api/admin', data, {
+        const response = await axios.post('http://13.233.173.240/api/admin', data, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
