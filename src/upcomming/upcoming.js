@@ -15,7 +15,7 @@ const UpcomingEvents = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await axios.get('http://13.233.173.240/api/recentEvents');
+            const response = await axios.get('http://localhost:5000/api/recentEvents');
             setEvents(response.data); // Assuming response.data is the array of events
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -42,7 +42,7 @@ const UpcomingEvents = () => {
 
     const handleDelete = async (eventId) => {
         try {
-            await axios.delete(`http://13.233.173.240/api/delete/${eventId}`);
+            await axios.delete(`http://localhost:5000/api/delete/${eventId}`);
             fetchEvents(); // Refresh the events list after deletion
             if (editingId === eventId) {
                 setEditingId(null); // Reset editing state if the deleted event was being edited
@@ -131,7 +131,7 @@ const UpcomingEvents = () => {
         }
 
         try {
-            const response = await axios.patch(`http://13.233.173.240/api/edit/${eventId}`, data, {
+            const response = await axios.patch(`http://localhost:5000/api/edit/${eventId}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

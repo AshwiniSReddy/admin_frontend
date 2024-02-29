@@ -65,7 +65,7 @@ import styles from "./styles.module.css";
 function Login() {
 	const googleAuth = () => {
 		window.open(
-			`http://13.233.173.240/api/auth/google/callback`,
+			`http://localhost:5000/auth/google/callback`,
 			"_self"
 		);
 	};
