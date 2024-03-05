@@ -75,7 +75,7 @@ import styles from "./styles.module.css";
 function Signup() {
 	const googleAuth = () => {
 		window.open(
-			`https://ec2-13-233-173-240.ap-south-1.compute.amazonaws.com/api/auth/google/callback`,
+			`http://ec2-13-233-173-240.ap-south-1.compute.amazonaws.com/api/auth/google/callback`,
 			"_self"
 		);
 	};
