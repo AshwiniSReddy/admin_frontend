@@ -65,7 +65,7 @@ import styles from "./styles.module.css";
 function Login() {
 	const googleAuth = () => {
 		window.open(
-			`https://13.233.173.240/api/auth/google/callback`,
+			`https://ec2-13-233-173-240.ap-south-1.compute.amazonaws.com/api/auth/google/callback`,
 			"_self"
 		);
 	};
