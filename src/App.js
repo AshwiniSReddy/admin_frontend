@@ -14,7 +14,7 @@ function App() {
 
   const getUser = async () => {
     try {
-      const url = `http://ec2-13-233-173-240.ap-south-1.compute.amazonaws.com/api/auth/login/success`;
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
       setUser(data.user._json);
     } catch (err) {

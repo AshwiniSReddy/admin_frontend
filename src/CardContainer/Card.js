@@ -537,7 +537,7 @@ const CardsContainer = () => {
 
   async function fetchUpcomingEventsWithAxios() {
     try {
-      const response = await axios.get('http://13.233.173.240/api/recentEvents');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents`);
       console.log(response.data);
       // Process the data
       
