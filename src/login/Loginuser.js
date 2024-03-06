@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // For redirecting to another route
+import './login.css'
+
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -28,32 +30,36 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {errorMessage && <p className="error">{errorMessage}</p>}
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+	<div className='login-container1'>
+        <div className="login-container">
+	  <h2>Login</h2>
+	  {errorMessage && <p className="error">{errorMessage}</p>}
+	  <form onSubmit={handleLogin} className="login-form">
+		<div>
+		  <label>Email:</label>
+		  <input
+			type="email"
+			value={email}
+			onChange={(e) => setEmail(e.target.value)}
+			required
+		  />
+		</div>
+		<div>
+		  <label>Password:</label>
+		  <input
+			type="password"
+			value={password}
+			onChange={(e) => setPassword(e.target.value)}
+			required
+		  />
+		</div>
+		<button type="submit">Login</button>
+	  </form>
+	</div>
+	</div>
+	
   );
+  
 }
 
 export default Login;
