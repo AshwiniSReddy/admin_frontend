@@ -36,7 +36,7 @@ function App() {
               console.log(user)}
             <Route path="/" element={user ? <EventForm user={user} /> : <Navigate to="/login" />} />
             <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-            <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
+            <Route path="/signup" element={user ? <Navigate to="paramscience.org" /> : <Signup />} />
           </Routes>
         </MyContext.Provider>
 
