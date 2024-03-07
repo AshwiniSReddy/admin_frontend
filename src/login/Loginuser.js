@@ -31,6 +31,9 @@ function Login() {
 
   return (
 	<div className='login-container1'>
+		<div className='logo_container'>
+			<img src='./logo_no_text_no_bg.png'/>
+		</div>
         <div className="login-container">
 	  <h2>Login</h2>
 	  {errorMessage && <p className="error">{errorMessage}</p>}
@@ -53,7 +56,7 @@ function Login() {
 			required
 		  />
 		</div>
-		<button type="submit">Login</button>
+	<div className='login-button'><button type="submit">Login</button></div>	
 	  </form>
 	</div>
 	</div>
