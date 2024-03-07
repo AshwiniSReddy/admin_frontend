@@ -487,10 +487,10 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
         />
 
       </div>
-      <div className='cardInner'>
+      {/* <div className='cardInner'>
         <label >Peferences:</label>
         <input type="number" data-index={index} id="preference" name="preference" min="1" max="5" disabled={cardData.isSaved}></input>
-      </div>
+      </div> */}
       <div>
         {/* <div><button onClick={addCard} style={{ margin: '20px' }}>Add</button></div> */}
         <div><button onClick={handleSubmit} style={{ margin: '20px' }}>Save</button></div>
