@@ -34,6 +34,7 @@
   .login-form {
     display: flex;
     flex-direction: column;
+    /* gap: 1vw; */
   }
   .login-form div{
     display: flex;

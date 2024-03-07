@@ -577,7 +577,7 @@ const CardsContainer = () => {
       try {
         // Submit the FormData
         console.log(data)
-        const response = await axios.post('http://13.233.173.240/api/admin', data, {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admin`, data, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
