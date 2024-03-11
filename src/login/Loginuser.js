@@ -24,7 +24,7 @@ function Login() {
       navigate('/Dashboard');
     })
     .catch((error) => {
-      console.error('Login error:', error.response.data.message);
+      console.error('Login error:', error);
       setErrorMessage(error.response.data.message || 'Error logging in');
     });
   };

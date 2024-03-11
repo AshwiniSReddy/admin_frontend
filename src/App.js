@@ -58,27 +58,26 @@ import EventForm from './Admin/Admin';
 import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
 import { MyContext } from './context';
-
+import AlertComponent from './alter/alert';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [user, setUser] = useState(null);
-
+   const [alert,setalert]=useState(false);
+   const [message,setMessage]=useState('');
 
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser }}>
-          <Routes>
+        <MyContext.Provider value={{ user, setUser,alert,setalert,message,setMessage}}>
+        {alert ? <AlertComponent /> : (
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/Dashboard" element={<EventForm />} />
+            </Routes>
+          )}
 
-            
-            {/* <Route path="/" element={<Signup/>} /> */}
-            
-            <Route path="/" element={<Login/>} />
-            <Route path='/Dashboard' element={<EventForm/>}/>
-            
-          </Routes>
         </MyContext.Provider>
 
       </BrowserRouter>
