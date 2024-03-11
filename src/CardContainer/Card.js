@@ -463,7 +463,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
 
       {/* Add more form fields as needed */}
       <div className='cardInner'>
-        <label for="photoVideo">PhotoVedio:</label>
+        <label for="photoVideo">PhotoVideo:<p>(.webp less than 1mb)</p></label>
         <input
           type="file"
           name="photoVideo"
@@ -473,6 +473,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           data-index={index}
           disabled={!isEditing && cardData.isSaved} // Enable file input only in edit mode
         />
+        
       </div>
       <div className='cardInner'>
         <label>Bookmyshow:</label>
@@ -485,6 +486,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           data-index={index}
           disabled={cardData.isSaved}
         />
+        
 
       </div>
       {/* <div className='cardInner'>
