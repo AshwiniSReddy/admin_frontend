@@ -79,3 +79,27 @@
     background-color: #a90000;
     color: white;
   }
+
+  .menuButtons{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:2vw;
+  
+  }
+
+  .menuButtons .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap:2%;
+    cursor: pointer;
+    border-radius: 1vw;
+    padding:0.6vw;
+    outline: none;
+    border: none;
+    font-size: medium;
+    font-weight: 500;
+    
+  }
