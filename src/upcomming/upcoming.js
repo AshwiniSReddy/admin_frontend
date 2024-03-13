@@ -249,7 +249,7 @@ const UpcomingEvents = () => {
                             onChange={(e) => handleFieldChange(event._id, 'time', e.target.value)}></input>
                     </div>
                     <div className='cardInner'>
-                        <label>Photo/Video:</label>
+                        <label>Photo (landscape):</label>
                         {/* Display the file URL if available and in edit mode */}
                         {editingId === event._id && editedEvents[event._id]?.photoVideoName ? (
                             <div>
@@ -275,7 +275,7 @@ const UpcomingEvents = () => {
                     </div>
 
                     <div className='cardInner'>
-                        <label>Photo/Video:</label>
+                        <label>Photo (portrait):</label>
                         {/* Display the file URL if available and in edit mode */}
                         {editingId === event._id && editedEvents[event._id]?.photoPortraitName ? (
                             <div>
