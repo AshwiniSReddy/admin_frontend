@@ -463,10 +463,23 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
 
       {/* Add more form fields as needed */}
       <div className='cardInner'>
-        <label for="photoVideo">PhotoVideo:<p>(.webp less than 1mb)</p></label>
+        <label for="photoVideo">Photo (landscape)</label>
         <input
           type="file"
           name="photoVideo"
+          placeholder="Photo/Video URL"
+          // value={cardData.photoVideo}
+          onChange={handleChange}
+          data-index={index}
+          disabled={!isEditing && cardData.isSaved} // Enable file input only in edit mode
+        />
+        
+      </div>
+      <div className='cardInner'>
+        <label for="photoPortrait">Photo (portrait)</label>
+        <input
+          type="file"
+          name="photoPortrait"
           placeholder="Photo/Video URL"
           // value={cardData.photoVideo}
           onChange={handleChange}
@@ -515,6 +528,7 @@ const CardsContainer = () => {
       tagline: '',
       description: '',
       photovedio: " ",
+      photoPortrait:"",
       bookMyShow: "",
       preferences: "",
       isSaved: false,

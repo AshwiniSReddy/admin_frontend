@@ -274,6 +274,32 @@ const UpcomingEvents = () => {
                         )}
                     </div>
 
+                    <div className='cardInner'>
+                        <label>Photo/Video:</label>
+                        {/* Display the file URL if available and in edit mode */}
+                        {editingId === event._id && editedEvents[event._id]?.photoPortraitName ? (
+                            <div>
+                                {/* Display the file URL as a clickable link */}
+                                <a href={editedEvents[event._id].photoPortraitName} target="_blank" rel="noopener noreferrer">View Current File</a>
+                            </div>
+                        ) : null}
+
+                        {/* Always show the file input to allow file upload; enable it during edit mode */}
+                        <input
+                            type="file"
+                            onChange={(e) => handleFileChange(event._id, 'photoPortrait', e.target.files)}
+                            disabled={editingId !== event._id}
+                            style={{ display: editingId === event._id ? 'block' : 'none' }} // Optionally hide when not editing
+                        />
+
+                        {/* Optionally, display a message if a file is already linked but not in edit mode */}
+                        {editingId !== event._id && event.photoPortrait && (
+                            <div>
+                                <a href={event.photoPortrait} target="_blank" rel="noopener noreferrer">View Uploaded File</a>
+                            </div>
+                        )}
+                    </div>
+
 
                     <div className='cardInner'>
                         <label >Bookmyshow:</label>
