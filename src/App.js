@@ -50,9 +50,48 @@
 // export default App;
 
 
+// import './App.css';
+// import axios from "axios";
+// import { Navigate } from "react-router-dom";
+// import { useState, useEffect } from 'react';
+// import EventForm from './Admin/Admin';
+// import Signup from './signUp/Signup';
+// import Login from './login/Loginuser';
+// import { MyContext } from './context';
+// import AlertComponent from './alter/alert';
+
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// function App() {
+//   const [user, setUser] = useState(null);
+//    const [alert,setalert]=useState(false);
+//    const [message,setMessage]=useState('');
+
+//   return (
+//     <div className="App">
+//       <BrowserRouter>
+//         <MyContext.Provider value={{ user, setUser,alert,setalert,message,setMessage}}>
+//         {alert ? <AlertComponent /> : (
+//             <Routes>
+//               <Route path="/" element={<Login />} />
+//               <Route path="/Dashboard" element={<EventForm />} />
+//             </Routes>
+//           )}
+
+//         </MyContext.Provider>
+
+//       </BrowserRouter>
+
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
 import './App.css';
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import EventForm from './Admin/Admin';
 import Signup from './signUp/Signup';
@@ -60,31 +99,38 @@ import Login from './login/Loginuser';
 import { MyContext } from './context';
 import AlertComponent from './alter/alert';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Define a protected route component
+const ProtectedRoute = ({ children }) => {
+  const userToken = localStorage.getItem('userToken');
+  // Check if userToken exists, if not, redirect to the login page
+  if (!userToken) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
 
 function App() {
   const [user, setUser] = useState(null);
-   const [alert,setalert]=useState(false);
-   const [message,setMessage]=useState('');
+  const [alert, setalert] = useState(false);
+  const [message, setMessage] = useState('');
 
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser,alert,setalert,message,setMessage}}>
-        {alert ? <AlertComponent /> : (
+        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage }}>
+          {alert ? <AlertComponent /> : (
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/Dashboard" element={<EventForm />} />
+              {/* Wrap EventForm in a ProtectedRoute component */}
+              <Route path="/Dashboard" element={<ProtectedRoute><EventForm /></ProtectedRoute>} />
             </Routes>
           )}
-
         </MyContext.Provider>
-
       </BrowserRouter>
-
     </div>
   );
 }
 
 export default App;
+
 
