@@ -258,8 +258,8 @@
 //             data.append(key, card[key]);
 //           }
 //         });
-        
-      
+
+
 //       // Capture and append 'fromDate', 'toDate', and 'time' values directly from the form inputs
 //       // These selectors might need to be adjusted based on your actual form structure
 //       const fromDateInput = document.querySelector(`input[name="fromDate"][data-index="${index}"]`);
@@ -384,7 +384,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
 
   //   updateCard(index, name, value);
   // };
-  
+
   const handleChange = (e) => {
     const { name, type } = e.target;
     if (type === 'file') {
@@ -397,7 +397,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
       updateCard(index, name, value);
     }
   };
-  
+
 
   return (
     <form className="card" >
@@ -463,7 +463,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
 
       {/* Add more form fields as needed */}
       <div className='cardInner'>
-        <label for="photoVideo">Photo (landscape)</label>
+        <label for="photoVideo">Photo(Max file size: 2MB<br />Resolution: 1920x1080 (landscape))</label>
         <input
           type="file"
           name="photoVideo"
@@ -473,10 +473,10 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           data-index={index}
           disabled={!isEditing && cardData.isSaved} // Enable file input only in edit mode
         />
-        
+
       </div>
       <div className='cardInner'>
-        <label for="photoPortrait">Photo (portrait)</label>
+        <label for="photoPortrait">Photo(Max file size: 2MB<br />Resolution: 1080x1920 (portrait))</label>
         <input
           type="file"
           name="photoPortrait"
@@ -486,7 +486,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           data-index={index}
           disabled={!isEditing && cardData.isSaved} // Enable file input only in edit mode
         />
-        
+
       </div>
       <div className='cardInner'>
         <label>Bookmyshow:</label>
@@ -499,7 +499,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
           data-index={index}
           disabled={cardData.isSaved}
         />
-        
+
 
       </div>
       {/* <div className='cardInner'>
@@ -509,7 +509,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
       <div>
         {/* <div><button onClick={addCard} style={{ margin: '20px' }}>Add</button></div> */}
         <div><button onClick={handleSubmit} style={{ margin: '20px' }}>Save</button></div>
-  
+
 
       </div>
 
@@ -522,17 +522,17 @@ const CardsContainer = () => {
   // Initialize the state with one default card
   const [cards, setCards] = useState([{
     fromDate: '',
-      toDate: '',
-      time: '',
-      title: '',
-      tagline: '',
-      description: '',
-      photovedio: " ",
-      photoPortrait:"",
-      bookMyShow: "",
-      preferences: "",
-      isSaved: false,
-      _id:""
+    toDate: '',
+    time: '',
+    title: '',
+    tagline: '',
+    description: '',
+    photovedio: " ",
+    photoPortrait: "",
+    bookMyShow: "",
+    preferences: "",
+    isSaved: false,
+    _id: ""
   }]);
 
   const [editingIndex, setEditingIndex] = useState(null);
@@ -548,15 +548,15 @@ const CardsContainer = () => {
     // console.log(index)
     setEditingIndex(index); // Mark this card as being edited
   };
- 
- 
+
+
 
   async function fetchUpcomingEventsWithAxios() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents`);
       console.log(response.data);
       // Process the data
-      
+
     } catch (error) {
       console.error('There was an error:', error);
     }
@@ -571,7 +571,7 @@ const CardsContainer = () => {
         // Assuming all other fields are already being handled correctly
         data.append(key, card[key]);
       });
-      
+
       // Capture and append 'fromDate', 'toDate', and 'time' values directly from the form inputs
       // These selectors might need to be adjusted based on your actual form structure
       const fromDateInput = document.querySelector(`input[name="fromDate"][data-index="${index}"]`);
@@ -634,17 +634,17 @@ const CardsContainer = () => {
 
   return (
     <div className='admin_page'>
-     
-      {cards.map((card, index) => (
-        <Card key={card._id || index} cardData={card} updateCard={updateCard} index={index}  handleSubmit={handleSubmit} handleEdit={(e) => handleEdit(e, index)} />
-      ))}
-  
-     
-      
-     
 
-    
-     
+      {cards.map((card, index) => (
+        <Card key={card._id || index} cardData={card} updateCard={updateCard} index={index} handleSubmit={handleSubmit} handleEdit={(e) => handleEdit(e, index)} />
+      ))}
+
+
+
+
+
+
+
     </div>
   );
 };
