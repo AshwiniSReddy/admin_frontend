@@ -75,10 +75,15 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
         <input type="date" id="ToDate" data-index={index} name="ToDate" disabled={cardData.isSaved}></input>
       </div>
       <div className='cardInner'>
-        <label >Select a time:</label>
+        <label >Start time:</label>
         <input type="time" id="appt" data-index={index} name="appt" disabled={cardData.isSaved}></input>
       </div>
       <div className='cardInner'>
+        <div className='cardInner'>
+          <label>End time:</label>
+          <input type="time" id="endTime" data-index={index} name="endTime" disabled={cardData.isSaved}></input>
+        </div>
+
 
       </div>
       <div className='cardInner'>
@@ -177,6 +182,7 @@ const CardsContainer = () => {
     fromDate: '',
     toDate: '',
     time: '',
+    endTime:'',
     title: '',
     tagline: '',
     description: '',
@@ -230,7 +236,7 @@ const CardsContainer = () => {
       const fromDateInput = document.querySelector(`input[name="fromDate"][data-index="${index}"]`);
       const toDateInput = document.querySelector(`input[name="ToDate"][data-index="${index}"]`); // Note: Ensure the name matches your form, might be "toDate"
       const timeInput = document.querySelector(`input[name="appt"][data-index="${index}"]`);
-
+      const endInput = document.querySelector(`input[name="endTime"][data-index="${index}"]`);
 
       if (fromDateInput) {
         data.append('fromDate', fromDateInput.value);
@@ -241,6 +247,10 @@ const CardsContainer = () => {
       if (timeInput && timeInput.value) { // Ensure there's a value and it's a string
 
         data.append('time', timeInput.value); // Append it as a single string value
+      }
+      if (endInput && endInput.value) { // Ensure there's a value and it's a string
+
+        data.append('endTime', endInput.value); // Append it as a single string value
       }
 
       try {
@@ -276,7 +286,7 @@ const CardsContainer = () => {
 
 
 
-
+  ///ddjhedheu
 
 
   const updateCard = (index, field, value) => {

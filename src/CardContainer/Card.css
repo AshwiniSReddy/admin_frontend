@@ -22,7 +22,7 @@
     /* border:2px solid black; */
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 0.2em;
     justify-content: center;
     align-items: center;
     background: #272c4a;
@@ -58,6 +58,24 @@ select{
     border-radius: 5px;
 }
 
+.timecontainer{
+    display: flex;
+    width: 100%;
+    
+    gap:15%
+}
+.timecontainer label{
+    width: 20%;
+    pointer-events: none;
+    transition: 0.2s;
+}
+ .timecontainer input{
+    width: 20%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 7px 0px;
+ }
 
 textarea{
     border-radius: 5px;

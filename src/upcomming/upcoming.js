@@ -129,6 +129,10 @@ const UpcomingEvents = () => {
             // Append 'time' as is
             data.append('time', updatedEventData.time);
         }
+        if (updatedEventData.endTime) {
+            // Append 'endTime' as is
+            data.append('endTime', updatedEventData.endTime);
+        }
 
         try {
             const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/edit/${eventId}`, data, {
@@ -243,10 +247,19 @@ const UpcomingEvents = () => {
 
                     </div>
                     <div className='cardInner'>
-                        <label >Select a time:</label>
+                        <label >Start time:</label>
                         <input type="time" id="appt" value={editingId === event._id ? editedEvents[event._id]?.time || '' : event.time}
                             disabled={editingId !== event._id}
                             onChange={(e) => handleFieldChange(event._id, 'time', e.target.value)}></input>
+                    </div>
+                    <div className='cardInner'>
+                        <label>End time:</label>
+                        <input
+                            type="time"
+                            value={editingId === event._id ? editedEvents[event._id]?.endTime || '' : event.endTime}
+                            disabled={editingId !== event._id}
+                            onChange={(e) => handleFieldChange(event._id, 'endTime', e.target.value)}
+                        />
                     </div>
                     <div className='cardInner'>
                         <label>Photo (landscape):</label>
