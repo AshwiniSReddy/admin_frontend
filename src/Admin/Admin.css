@@ -55,6 +55,14 @@
 
 }
 
+
+.history-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
 .upcomming_events {
     /* background: #1b203d; */
     background: #d0d7e1;

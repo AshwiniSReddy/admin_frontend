@@ -67,9 +67,9 @@ const EventForm = () => {
         <h2 onClick={() => handleViewChange('Contact')}>Contact details</h2> {/* New section */}
       </div>
 
-      <div className='section'>
+      <div className={`section ${view === 'History' ? 'history-section' : ''}`}>
         {view === 'Highlights' && <CardsContainer />}
-        {view === 'History' && <History />}
+        {view === 'History' && <UpcomingEvents />}
         {view === 'Contact' && <ContactDetails />}
         {/* <div className='upcomming_events'><UpcomingEvents /></div>  */}
       </div>
