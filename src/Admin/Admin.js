@@ -4,10 +4,13 @@ import CardsContainer from '../CardContainer/Card';
 import UpcomingEvents from '../upcomming/upcoming';
 import Menubar from '../Menu/Menu';
 import History from '../History/History';
+import ContactDetails from '../ConatactDetails/Contact';
 import './Admin.css'
 
 const EventForm = () => {
-  const [toggle, settoggle] = useState(true)
+  // const [toggle, settoggle] = useState(true)
+  const [view, setView] = useState('Highlights'); // Changed toggle to view for clarity
+
   const [formData, setFormData] = useState({
     eventUpdates: '',
     photo: null,  // Changed to null, as this will be a file
@@ -24,6 +27,10 @@ const EventForm = () => {
   const handleFileChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
+  const handleViewChange = (viewName) => {
+    setView(viewName);
+  };
+  
 
 
   const handleSubmit = async (e) => {
@@ -50,53 +57,25 @@ const EventForm = () => {
   };
 
   return (
-    // <form onSubmit={handleSubmit}>
-    //   <input type="text" name="eventUpdates" placeholder="Event/Recent Updates" value={formData.eventUpdates} onChange={handleInputChange} />
-    //   <input type="file" name="photo" onChange={handleFileChange} />
-    //   <input type="file" name="video" onChange={handleFileChange} />
-    //   <input type="text" name="title" placeholder="Title" value={formData.title} onChange={handleInputChange} />
-    //   <input type="text" name="tagline" placeholder="Tagline" value={formData.tagline} onChange={handleInputChange} />
-    //   <textarea name="description" placeholder="Description" value={formData.description} onChange={handleInputChange} />
-    //   <button type="submit">Submit</button>
-    // </form>
-    // <div className='Admin'>
-    //   <Menubar />
-
-
-    //   <div className='AdminCard'>
-    //     <div className='header'>
-    //       <div onClick={() => settoggle(true)}><h2>Highlights</h2></div>
-    //       <div onClick={() => settoggle(false)}><h2>History</h2></div>
-    //     </div>
-
-    //     <div> {toggle ? <CardsContainer /> : <History />}</div>
-    //     {/* <UpcomingEvents/> */}
-    //     <div className='AdminCard2'>
-    //       <UpcomingEvents />
-    //     </div>
-    //   </div>
-
-
-    // </div>
-
-    <div className='Admin'>
-      <Menubar />
-      <div className='AdminCard'>
-        <div className='header'>
-          <h2 onClick={() => settoggle(true)}>Highlights</h2>
-          <h2 onClick={() => settoggle(false)}>History</h2>
-        </div>
-
-        <div className='section'> {toggle ? <CardsContainer /> : <History />}
-         <div className='upcomming_events'><UpcomingEvents /></div> 
-        </div>
-
+  <div className='Admin'>
+     <Menubar />
+    <div className='AdminCard'>
+      <div className='header'>
+     
+        <h2 onClick={() => handleViewChange('Highlights')}>Highlights</h2>
+        <h2 onClick={() => handleViewChange('History')}>History</h2>
+        <h2 onClick={() => handleViewChange('Contact')}>Contact details</h2> {/* New section */}
       </div>
 
+      <div className='section'>
+        {view === 'Highlights' && <CardsContainer />}
+        {view === 'History' && <History />}
+        {view === 'Contact' && <ContactDetails />}
+        {/* <div className='upcomming_events'><UpcomingEvents /></div>  */}
+      </div>
     </div>
-
-
-  );
+  </div>
+);
 };
 
 export default EventForm;

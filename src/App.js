@@ -114,11 +114,11 @@ function App() {
   const [user, setUser] = useState(null);
   const [alert, setalert] = useState(false);
   const [message, setMessage] = useState('');
-
+  const [selectedItem, setSelectedItem] = useState(null);
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage }}>
+        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem}}>
           {alert ? <AlertComponent /> : (
             <Routes>
               <Route path="/" element={<Login />} />
