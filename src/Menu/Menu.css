@@ -72,6 +72,13 @@
     .bm-menu-wrap{
         width: 100% !important;
     }
+    .bm-burger-button{
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      left: 10px;
+      top: 10px;
+    }
   }
 
 
