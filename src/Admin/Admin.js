@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useContext } from 'react';
+import { MyContext } from '../context';
 import CardsContainer from '../CardContainer/Card';
 import UpcomingEvents from '../upcomming/upcoming';
 import Menubar from '../Menu/Menu';
 import History from '../History/History';
 import ContactDetails from '../ConatactDetails/Contact';
 import './Admin.css'
+import AlertComponent from '../alter/alert';
+import ContactHistory from '../ContactHistory/ContactHistory';
 
 const EventForm = () => {
   // const [toggle, settoggle] = useState(true)
-  const [view, setView] = useState('Highlights'); // Changed toggle to view for clarity
+  const { view, setView,headerContent,setHeaderContent ,selectedItem,setSelectedItem} = useContext(MyContext); // Assuming setView is added to context
 
   const [formData, setFormData] = useState({
     eventUpdates: '',
@@ -28,6 +32,9 @@ const EventForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
   const handleViewChange = (viewName) => {
+    if (view === viewName && selectedItem) {
+      setSelectedItem(null);
+    }
     setView(viewName);
   };
   
@@ -62,15 +69,17 @@ const EventForm = () => {
     <div className='AdminCard'>
       <div className='header'>
      
-        <h2 onClick={() => handleViewChange('Highlights')}>Highlights</h2>
-        <h2 onClick={() => handleViewChange('History')}>History</h2>
-        <h2 onClick={() => handleViewChange('Contact')}>Contact details</h2> {/* New section */}
+        <h2 onClick={() => handleViewChange(headerContent[0])}>{headerContent[0]}</h2>
+        <h2 onClick={() => handleViewChange(headerContent[1])}>{headerContent[1]}</h2>
+        
       </div>
 
       <div className={`section ${view === 'History' ? 'history-section' : ''}`}>
         {view === 'Highlights' && <CardsContainer />}
         {view === 'History' && <UpcomingEvents />}
         {view === 'Contact' && <ContactDetails />}
+        {view==="alert" && <AlertComponent/>}
+        {view==="Contact history" && <ContactHistory/>}
         {/* <div className='upcomming_events'><UpcomingEvents /></div>  */}
       </div>
     </div>

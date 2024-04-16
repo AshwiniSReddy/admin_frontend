@@ -46,3 +46,8 @@
     background-color: #0056b3; /* Darker shade on hover */
   }
   
+
+  .detailpagebuttons{
+    display: flex;
+    gap:1vw;
+  }

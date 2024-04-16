@@ -61,3 +61,7 @@
     background-color: #1b203d;
     border-color:white ;
 }
+
+.deletehistory{
+  z-index: 1;
+}

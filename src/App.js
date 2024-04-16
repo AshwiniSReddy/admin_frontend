@@ -115,10 +115,14 @@ function App() {
   const [alert, setalert] = useState(false);
   const [message, setMessage] = useState('');
   const [selectedItem, setSelectedItem] = useState(null);
+  const [view, setView] = useState('Highlights'); // Changed toggle to view for clarity
+  const [headerContent,setHeaderContent]=useState(["Highlights","History"])
+  const [selectedContactItem, setSelectedContactItem] = useState(null);
+  const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem}}>
+        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem}}>
           {alert ? <AlertComponent /> : (
             <Routes>
               <Route path="/" element={<Login />} />

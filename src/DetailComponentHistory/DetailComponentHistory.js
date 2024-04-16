@@ -1,16 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import './DetailComponent.css';
+import './DetailComponentHistory.css';
 
-const DetailComponent = ({ selectedItem, setSelectedItem,showContactedButton,onItemContacted }) => {
-  console.log(selectedItem,"selected")
+const DetailComponentHistory = ({ selectedItem, setSelectedItem,showContactedButton}) => {
   if (!selectedItem) return null; // Don't render if no item is selected
   const handleContactedClick = async () => {
     try {
    
       const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContact-upadate-in-history/${selectedItem._id}`);
       console.log(response.data);
-      onItemContacted(selectedItem._id);
       setSelectedItem(null); // Optionally remove the selected item from the UI state
       console.log('Contact has been archived and deleted!');
     } catch (error) {
@@ -43,10 +41,10 @@ const DetailComponent = ({ selectedItem, setSelectedItem,showContactedButton,onI
         </tbody>
       </table>
       <div className='detailpagebuttons'> <button onClick={() => setSelectedItem(null)}>Go Back</button>
-      {showContactedButton && <button onClick={handleContactedClick}>Contacted</button>}</div> 
+      {showContactedButton&&<button onClick={handleContactedClick}>Contacted</button>}</div> 
       
     </div>
   );
 };
 
-export default DetailComponent;
+export default DetailComponentHistory;

@@ -66,7 +66,7 @@ function AlertComponent() {
 
     return (
         <>
-            <Menubar />
+        
             <div className='alert-container-main'>
                 <div className="alert-container">
                     <input
