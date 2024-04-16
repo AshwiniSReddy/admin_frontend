@@ -23,6 +23,13 @@ const Records = ({ data ,detetebutton,handleRefresh}) => {
     }
 
   };
+   // Function to format the date
+ // Function to format the date to only show year, month, and day
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 
   return (
     <div className='displayContacts'>
@@ -32,6 +39,7 @@ const Records = ({ data ,detetebutton,handleRefresh}) => {
             <th scope='col'>Name</th>
             <th scope='col'>Email</th>
             <th scope='col'>Phone number</th>
+            <th scope='col'>Date </th>
           {detetebutton &&  <th scope='col'>Delete</th>} 
           </tr>
         </thead>
@@ -41,6 +49,7 @@ const Records = ({ data ,detetebutton,handleRefresh}) => {
               <td key={index} onClick={() => handleRowClick(item)}>{item.name}</td>
               <td key={index} onClick={() => handleRowClick(item)}>{item.email}</td>
               <td key={index} onClick={() => handleRowClick(item)}>{item.phoneNumber}</td>
+              <td>{formatDate(item.createdAt)}</td>
              {detetebutton && <td className='deletehistory'>
                 <button onClick={() => handleDelete(item._id)}>Delete</button>
               </td>} 
