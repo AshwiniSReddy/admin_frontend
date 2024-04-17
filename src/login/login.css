@@ -76,8 +76,50 @@
     margin-bottom: 15px;
   }
   
-  @media only screen and (max-width: 770px) {
-    .login-container {
-      width: auto;
-    }
+ .admin-left{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+ }
+ .admin-right{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  background: url('../images/Login.jpg');
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+ }
+
+ .admin-right img{
+  width: 100%;
+  height: 100%;
+ }
+
+ .admin-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+ 
+  background: #1b203d;
+  display: flex;
+  
+}
+ 
+/* login.css */
+@media (max-width: 768px) {  /* Adjust this value based on your design needs */
+  .admin-right {
+      background: none;
+      width: 0px;
+      overflow: hidden;
+  }
+  .admin-left{
+    width: 100%;
+    overflow: hidden;
+  }
 }

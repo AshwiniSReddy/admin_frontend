@@ -101,14 +101,15 @@ import { MyContext } from './context';
 import AlertComponent from './alter/alert';
 
 // Define a protected route component
-const ProtectedRoute = ({ children }) => {
-  const userToken = localStorage.getItem('userToken');
-  // Check if userToken exists, if not, redirect to the login page
-  if (!userToken) {
-    return <Navigate to="/" replace />;
-  }
-  return children;
-};
+// const ProtectedRoute = ({ children }) => {
+//   const userToken = localStorage.getItem('userToken');
+//   // Check if userToken exists, if not, redirect to the login page
+//   if (!userToken) {
+//     return <Navigate to="/" replace />;
+//   }
+//   return children;
+// };
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -119,15 +120,34 @@ function App() {
   const [headerContent,setHeaderContent]=useState(["Highlights","History"])
   const [selectedContactItem, setSelectedContactItem] = useState(null);
   const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
+  
+ 
+
+  const getUser = async () => {
+    try {
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login/success`;
+      const { data } = await axios.get(url, { withCredentials: true });
+      console.log(data)
+      setUser(data.user._json);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div className="App">
       <BrowserRouter>
         <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem}}>
           {alert ? <AlertComponent /> : (
             <Routes>
-              <Route path="/" element={<Login />} />
+              <Route path="/" element={user ? <EventForm /> : <Navigate to="/login" />} />
+              <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+              <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
               {/* Wrap EventForm in a ProtectedRoute component */}
-              <Route path="/Dashboard" element={<ProtectedRoute><EventForm /></ProtectedRoute>} />
+              {/* <Route path="/Dashboard" element={<ProtectedRoute><EventForm /></ProtectedRoute>} /> */}
             </Routes>
           )}
         </MyContext.Provider>
