@@ -146,8 +146,9 @@ function App() {
               <Route path="/" element={user ? <EventForm /> : <Navigate to="/login" />} />
               <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
               <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
+
               {/* Wrap EventForm in a ProtectedRoute component */}
-              {/* <Route path="/Dashboard" element={<ProtectedRoute><EventForm /></ProtectedRoute>} /> */}
+              <Route path="/Dashboard" element={<EventForm />} />
             </Routes>
           )}
         </MyContext.Provider>
