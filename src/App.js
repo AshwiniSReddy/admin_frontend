@@ -143,8 +143,8 @@ function App() {
         <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem}}>
           {alert ? <AlertComponent /> : (
             <Routes>
-              <Route path="/" element={user ? <EventForm /> : <Navigate to="/login" />} />
-              <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+              <Route path="/" element={user ? <Navigate to="/Dashboard" /> : <Navigate to="/login" />} />
+              <Route path="/login" element={user ? <Navigate to="/Dashboard"/> : <Login/>} />
               <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
 
               {/* Wrap EventForm in a ProtectedRoute component */}
