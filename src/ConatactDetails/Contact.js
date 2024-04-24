@@ -4,6 +4,9 @@ import Records from '../Record/Record';
 import Pagination from '../Pagination/Pagination';
 import { MyContext } from '../context';
 import DetailComponent from '../DetailComponent/DetailComponent';
+import io from 'socket.io-client';
+
+import { socket } from '../socket/socket';
 
 function Contact() {
     const { selectedItem,setSelectedItem} = useContext(MyContext);
@@ -31,8 +34,13 @@ function Contact() {
         };
 
         fetchSubmissions();
-    }, []);
+        socket.on('contact_removed', (contactId) => {
+            const updatedData = data.filter(item => item._id !== contactId);
+            setData(updatedData);
+        });
+    }, [data]);
     useEffect(() => {
+        socket.off('contact_removed');
         return () => setSelectedItem(null); // Cleanup function to reset on component unmount
       }, []);
     

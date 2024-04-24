@@ -92,6 +92,7 @@
 
 import './App.css';
 import axios from "axios";
+import io from 'socket.io-client';
 import { Navigate, BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import EventForm from './Admin/Admin';
@@ -99,6 +100,7 @@ import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
 import { MyContext } from './context';
 import AlertComponent from './alter/alert';
+
 
 // Define a protected route component
 // const ProtectedRoute = ({ children }) => {
@@ -120,7 +122,13 @@ function App() {
   const [headerContent,setHeaderContent]=useState(["Highlights","History"])
   const [selectedContactItem, setSelectedContactItem] = useState(null);
   const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
-  
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    const newSocket = io(process.env.REACT_APP_BACKEND_URL);
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, [setSocket]);
  
 
   const getUser = async () => {
@@ -140,7 +148,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem}}>
+        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem,socket, setSocket}}>
           {alert ? <AlertComponent /> : (
             <Routes>
               <Route path="/" element={user ? <Navigate to="/Dashboard" /> : <Navigate to="/login" />} />

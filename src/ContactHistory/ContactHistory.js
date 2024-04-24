@@ -4,6 +4,7 @@ import Records from '../Record/Record';
 import Pagination from '../Pagination/Pagination';
 import { MyContext } from '../context';
 import DetailComponent from '../DetailComponent/DetailComponent';
+import { socket } from '../socket/socket';
 
 function ContactHistory() {
     const { selectedItem,setSelectedItem} = useContext(MyContext);
@@ -16,6 +17,7 @@ function ContactHistory() {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(data.length / recordsPerPage);
+
      
     useEffect(() => {
          
@@ -29,11 +31,16 @@ function ContactHistory() {
                 setLoading(false);
             }
         };
+        socket.on('recordDeleted', (deletedRecordId) => {
+            const updatedData = data.filter(item => item._id !== deletedRecordId);
+            setData(updatedData);
+        });
 
         fetchSubmissions();
-    }, [refresh]);
+    }, [refresh,data]);
     
     useEffect(() => {
+        socket.off('recordDeleted');
         return () => setSelectedItem(null); // Cleanup function to reset on component unmount
       }, []);
       const handleRefresh = () => {

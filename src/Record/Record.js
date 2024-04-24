@@ -4,6 +4,7 @@ import axios from 'axios';
 import DetailComponent from '../DetailComponent/DetailComponent'; // Adjust the path as necessary
 import './Record.css';
 import { MyContext } from '../context'
+import { socket } from '../socket/socket';
 
 const Records = ({ data ,detetebutton,handleRefresh}) => {
 //   const [selectedItem, setSelectedItem] = useState(null);
@@ -14,6 +15,7 @@ const Records = ({ data ,detetebutton,handleRefresh}) => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContactHistory/${id}`);
+      socket.emit('recordDeleted',id); 
       console.log('Record deleted successfully');
       handleRefresh();
       // Optionally refresh the data or use state to remove the item visually

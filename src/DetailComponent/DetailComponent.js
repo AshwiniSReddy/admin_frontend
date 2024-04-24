@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import './DetailComponent.css';
+import io from 'socket.io-client';
+
+import { socket } from '../socket/socket';
 
 const DetailComponent = ({ selectedItem, setSelectedItem,showContactedButton,onItemContacted }) => {
   console.log(selectedItem,"selected")
@@ -11,6 +14,7 @@ const DetailComponent = ({ selectedItem, setSelectedItem,showContactedButton,onI
       const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContact-upadate-in-history/${selectedItem._id}`);
       console.log(response.data);
       onItemContacted(selectedItem._id);
+      socket.emit('contact_updated', selectedItem._id); 
       setSelectedItem(null); // Optionally remove the selected item from the UI state
       console.log('Contact has been archived and deleted!');
     } catch (error) {
