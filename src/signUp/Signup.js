@@ -75,7 +75,7 @@ import styles from "./styles.module.css";
 function Signup() {
 	const googleAuth = () => {
 		window.open(
-			`${process.env.REACT_APP_BACKEND_URL}/api/auth/google/callback`,
+			`https://admindashboard.paramscience.org/api/auth/google/callback`,
 			"_self"
 		);
 	};

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './upcomming.css'
+
+import { MyContext } from '../context';
 
 const UpcomingEvents = () => {
     const [events, setEvents] = useState([]);
@@ -8,14 +10,14 @@ const UpcomingEvents = () => {
     const [editedEvents, setEditedEvents] = useState({}); // Store edited event data
     const isoDateString = "2024-02-09T18:30:00.000+00:00";
     const dateObject = new Date(isoDateString);
-
+    const {user}=useContext(MyContext)
     useEffect(() => {
         fetchEvents();
     }, []);
 
     const fetchEvents = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents_test`);
             setEvents(response.data); // Assuming response.data is the array of events
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -42,7 +44,7 @@ const UpcomingEvents = () => {
 
     const handleDelete = async (eventId) => {
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/delete/${eventId}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/delete_test/${eventId}`);
             fetchEvents(); // Refresh the events list after deletion
             if (editingId === eventId) {
                 setEditingId(null); // Reset editing state if the deleted event was being edited
@@ -51,6 +53,22 @@ const UpcomingEvents = () => {
 
             console.error('Error deleting event:', error);
         }
+        const userId = user && user.given_name;
+      const eventId_test = 'event789';
+      const message = `${user && user.given_name} deleted an alert message`;
+  
+      try {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/deleteAlertActivity`, {
+          userId,
+          eventId_test,
+          message,
+        });
+        // alert('Event created and notification sent');
+      } catch (error) {
+        console.error('Error creating event:', error);
+        // alert('Failed to create event');
+      }
+
     };
 
     // const handleSave = async (eventId) => {
@@ -135,7 +153,7 @@ const UpcomingEvents = () => {
         }
 
         try {
-            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/edit/${eventId}`, data, {
+            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/edit_test/${eventId}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -151,6 +169,21 @@ const UpcomingEvents = () => {
             });
         } catch (error) {
             console.error('Error updating event:', error);
+        }
+        const userId = user && user.given_name;
+        const eventId_test = 'event789';
+        const message = `${user && user.given_name} edited a  event`;
+    
+        try {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/editEventActivity`, {
+            userId,
+            eventId_test,
+            message,
+          });
+          // alert('Event created and notification sent');
+        } catch (error) {
+          console.error('Error creating event:', error);
+          // alert('Failed to create event');
         }
     };
 

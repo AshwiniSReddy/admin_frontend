@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Compressor from "compressorjs";
+import { useContext } from 'react';
+import { MyContext } from '../context';
 
 import './Card.css'
 // Define the Card component
-const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing }) => {
+const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing,user}) => {
   // Handle input changes and update the state in the parent component
 
 
@@ -178,6 +180,7 @@ const Card = ({ cardData, updateCard, index, handleSubmit, handleEdit, isEditing
 // Define the main component
 const CardsContainer = () => {
   // Initialize the state with one default card
+  const { user } = useContext(MyContext);
   const [cards, setCards] = useState([{
     fromDate: '',
     toDate: '',
@@ -195,6 +198,7 @@ const CardsContainer = () => {
   }]);
 
   const [editingIndex, setEditingIndex] = useState(null);
+  
 
   const handleEdit = (e, index) => {
     e.preventDefault();
@@ -274,6 +278,21 @@ const CardsContainer = () => {
         console.error('There was an error submitting the form!', error);
         // Handle the submission error
       }
+      const userId = user && user.given_name;
+      const eventId = 'event789';
+      const message = `${user && user.given_name} created a new event`;
+  
+      try {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/CreateEventActivity`, {
+          userId,
+          eventId,
+          message,
+        });
+        // alert('Event created and notification sent');
+      } catch (error) {
+        console.error('Error creating event:', error);
+        // alert('Failed to create event');
+      }
 
 
 
@@ -299,7 +318,7 @@ const CardsContainer = () => {
     <div className='admin_page'>
 
       {cards.map((card, index) => (
-        <Card key={card._id || index} cardData={card} updateCard={updateCard} index={index} handleSubmit={handleSubmit} handleEdit={(e) => handleEdit(e, index)} />
+        <Card key={card._id || index} cardData={card} updateCard={updateCard} index={index} handleSubmit={handleSubmit} handleEdit={(e) => handleEdit(e, index)} user={user}/>
       ))}
 
 

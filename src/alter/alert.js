@@ -5,7 +5,7 @@ import { MyContext } from '../context';
 import './alert.css';
 
 function AlertComponent() {
-    const { setMessage } = useContext(MyContext);
+    const { setMessage ,user} = useContext(MyContext);
 
     // State to manage the input for a new or current alert message
     const [newAlertMessage, setNewAlertMessage] = useState('');
@@ -24,6 +24,7 @@ function AlertComponent() {
         } catch (error) {
             console.error('Failed to fetch current alert message:', error);
         }
+       
     };
     useEffect(() => {
         
@@ -45,6 +46,20 @@ function AlertComponent() {
         } catch (error) {
             console.error('There was a problem with the Axios request:', error);
         }
+        const userId = user && user.given_name;
+        const eventId_test = 'event789';
+        const message = `${user && user.given_name} added alert message`;
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/createAlertActivity`, {
+              userId,
+              eventId_test,
+              message,
+            });
+            // alert('Event created and notification sent');
+          } catch (error) {
+            console.error('Error creating event:', error);
+            // alert('Failed to create event');
+          }
     };
 
     const handleEdit = () => {
