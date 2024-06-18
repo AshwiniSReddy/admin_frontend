@@ -117,9 +117,9 @@ function App() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    const newSocket = io('https://admindashboard.paramscience.org', {
+    const newSocket = io(`${process.env.REACT_APP_BACKEND_URL}`, {
       withCredentials: true,
-      // transports: ['websocket', 'polling'],
+      transports: ['websocket', 'polling'],
     });
     setSocket(newSocket);
     return () => newSocket.close();
@@ -128,7 +128,7 @@ function App() {
 
   const getUser = async () => {
     try {
-      const url = `https://admindashboard.paramscience.org/api/auth/login/success`;
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
       console.log(data,"login")
       setUser(data.user._json);
