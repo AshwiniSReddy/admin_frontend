@@ -100,7 +100,7 @@ import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
 import { MyContext } from './context';
 import AlertComponent from './alter/alert';
-import { socket } from './socket/socket';
+
 
 // Define a protected route component
 // const ProtectedRoute = ({ children }) => {
@@ -126,9 +126,9 @@ function App() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    // const newSocket = io('https://admindashboard.paramscience.org');
+    const newSocket = io('https://admindashboard.paramscience.org');
     setSocket(socket);
-    return () => socket.close();
+    return () => newSocket.close();
   }, [setSocket]);
  
 
