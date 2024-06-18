@@ -119,7 +119,7 @@ function App() {
   useEffect(() => {
     const newSocket = io('https://admindashboard.paramscience.org', {
       withCredentials: true,
-      transports: ['websocket', 'polling'],
+      // transports: ['websocket', 'polling'],
     });
     setSocket(newSocket);
     return () => newSocket.close();
