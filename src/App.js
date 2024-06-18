@@ -100,7 +100,7 @@ import Signup from './signUp/Signup';
 import Login from './login/Loginuser';
 import { MyContext } from './context';
 import AlertComponent from './alter/alert';
-
+import { socket } from './socket/socket';
 
 // Define a protected route component
 // const ProtectedRoute = ({ children }) => {
@@ -124,10 +124,11 @@ function App() {
   const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
   const [socket, setSocket] = useState(null);
   const [notifications, setNotifications] = useState([]);
+
   useEffect(() => {
-    const newSocket = io(process.env.REACT_APP_BACKEND_URL);
-    setSocket(newSocket);
-    return () => newSocket.close();
+    // const newSocket = io('https://admindashboard.paramscience.org');
+    setSocket(socket);
+    return () => socket.close();
   }, [setSocket]);
  
 
