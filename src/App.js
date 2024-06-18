@@ -102,15 +102,6 @@ import { MyContext } from './context';
 import AlertComponent from './alter/alert';
 
 
-// Define a protected route component
-// const ProtectedRoute = ({ children }) => {
-//   const userToken = localStorage.getItem('userToken');
-//   // Check if userToken exists, if not, redirect to the login page
-//   if (!userToken) {
-//     return <Navigate to="/" replace />;
-//   }
-//   return children;
-// };
 
 
 function App() {
@@ -126,8 +117,11 @@ function App() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    const newSocket = io('https://admindashboard.paramscience.org');
-    setSocket(socket);
+    const newSocket = io('https://admindashboard.paramscience.org', {
+      withCredentials: true,
+      transports: ['websocket', 'polling'],
+    });
+    setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
  
