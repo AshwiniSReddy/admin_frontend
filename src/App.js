@@ -117,6 +117,8 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     const newSocket = io(process.env.REACT_APP_BACKEND_URL);
+    console.log(newSocket,"socket")
+    
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
@@ -133,7 +135,9 @@ function App() {
     }
   };
   useEffect(() => {
+    console.log(socket,"socket")
     if (socket) {
+      console.log(socket,"socket")
       // Listen for initial activities
       socket.on('init-activities', (activities) => {
         setNotifications(activities);
