@@ -150,7 +150,7 @@ function Login() {
 	const googleAuth = () => {
 
 		window.open(
-			`https://admindashboard.paramscience.org/api/auth/google/callback`,
+			`${process.env.REACT_APP_BACKEND_URL}/api/auth/google/callback`,
 			"_self"
 		);
 	};

@@ -115,12 +115,8 @@ function App() {
   const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
   const [socket, setSocket] = useState(null);
   const [notifications, setNotifications] = useState([]);
-
   useEffect(() => {
-    const newSocket = io(`${process.env.REACT_APP_BACKEND_URL}`, {
-      withCredentials: true,
-      transports: ['websocket', 'polling'],
-    });
+    const newSocket = io(process.env.REACT_APP_BACKEND_URL);
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);

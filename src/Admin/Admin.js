@@ -52,7 +52,7 @@ const EventForm = () => {
   
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_UR}/api/admin`, data, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/admin`, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
