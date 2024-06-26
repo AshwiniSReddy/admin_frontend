@@ -5,7 +5,7 @@ import { MyContext } from '../context';
 import './alert.css';
 
 function AlertComponent() {
-    const { setMessage } = useContext(MyContext);
+    const { setMessage ,user} = useContext(MyContext);
 
     // State to manage the input for a new or current alert message
     const [newAlertMessage, setNewAlertMessage] = useState('');
@@ -15,7 +15,7 @@ function AlertComponent() {
     // Fetch the current alert message when the component mounts
     const fetchCurrentAlertMessage = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getAlert`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getAlert_test`);
             console.log(response.data)
             if (response.data && response.data.message) {
                 setPlaceholder(response.data.data.message); // Set the fetched message as placeholder
@@ -24,6 +24,7 @@ function AlertComponent() {
         } catch (error) {
             console.error('Failed to fetch current alert message:', error);
         }
+       
     };
     useEffect(() => {
         
@@ -33,7 +34,7 @@ function AlertComponent() {
 
     const handleCreateOrUpdate = async () => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/alert`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/createAlert_test`, {
                 message: newAlertMessage
             });
 
@@ -45,6 +46,20 @@ function AlertComponent() {
         } catch (error) {
             console.error('There was a problem with the Axios request:', error);
         }
+        const userId = user && user.given_name;
+        const eventId_test = 'event789';
+        const message = `${user && user.given_name} added alert message`;
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/createAlertActivity`, {
+              userId,
+              eventId_test,
+              message,
+            });
+            // alert('Event created and notification sent');
+          } catch (error) {
+            console.error('Error creating event:', error);
+            // alert('Failed to create event');
+          }
     };
 
     const handleEdit = () => {
@@ -55,7 +70,7 @@ function AlertComponent() {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deletealert`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteAlert_test`);
             setMessage('');
             setPlaceholder('Add alert message'); // Reset placeholder after deletion
             setNewAlertMessage('');

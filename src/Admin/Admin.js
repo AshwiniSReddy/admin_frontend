@@ -10,6 +10,7 @@ import ContactDetails from '../ConatactDetails/Contact';
 import './Admin.css'
 import AlertComponent from '../alter/alert';
 import ContactHistory from '../ContactHistory/ContactHistory';
+import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
 const EventForm = () => {
   // const [toggle, settoggle] = useState(true)
@@ -51,7 +52,7 @@ const EventForm = () => {
   
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_UR}/api`, data, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_UR}/api/admin_test`, data, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -80,9 +81,12 @@ const EventForm = () => {
         {view === 'Contact' && <ContactDetails />}
         {view==="alert" && <AlertComponent/>}
         {view==="Contact history" && <ContactHistory/>}
+        {view=="Activity feed" && <ActivityFeed/>}
         {/* <div className='upcomming_events'><UpcomingEvents /></div>  */}
       </div>
     </div>
+
+    
   </div>
 );
 };

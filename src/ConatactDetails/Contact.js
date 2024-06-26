@@ -9,7 +9,7 @@ import io from 'socket.io-client';
 import { socket } from '../socket/socket';
 
 function Contact() {
-    const { selectedItem,setSelectedItem} = useContext(MyContext);
+    const { selectedItem,setSelectedItem,user} = useContext(MyContext);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +24,7 @@ function Contact() {
        
         const fetchSubmissions = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/get-form-submissions`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getContactdetails_test`);
                 setData(response.data);
             } catch (error) {
                 alert('There was an error while retrieving the data');
@@ -38,7 +38,7 @@ function Contact() {
             const updatedData = data.filter(item => item._id !== contactId);
             setData(updatedData);
         });
-    }, [data]);
+    }, []);
     useEffect(() => {
         socket.off('contact_removed');
         return () => setSelectedItem(null); // Cleanup function to reset on component unmount
@@ -55,7 +55,7 @@ function Contact() {
             {loading ? (
                 <p>Loading...</p>
             ) : selectedItem ? (
-                <DetailComponent selectedItem={selectedItem} setSelectedItem={setSelectedItem} showContactedButton={true} detetebutton={false} onItemContacted={handleItemContacted} />
+                <DetailComponent selectedItem={selectedItem} setSelectedItem={setSelectedItem} showContactedButton={true} detetebutton={false} onItemContacted={handleItemContacted} user={user}/>
             ) : (
                 <>
                     <Records data={currentRecords}  />

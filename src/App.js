@@ -123,7 +123,7 @@ function App() {
   const [selectedContactItem, setSelectedContactItem] = useState(null);
   const [selectedHistoryItem, setSelectedHistoryItem] = useState(null);
   const [socket, setSocket] = useState(null);
-
+  const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     const newSocket = io(process.env.REACT_APP_BACKEND_URL);
     setSocket(newSocket);
@@ -135,12 +135,83 @@ function App() {
     try {
       const url = `${process.env.REACT_APP_BACKEND_URL}/api/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
-      console.log(data)
+      console.log(data,"login")
       setUser(data.user._json);
     } catch (err) {
       console.log(err);
     }
   };
+  useEffect(() => {
+    if (socket) {
+      // Listen for initial activities
+      socket.on('init-activities', (activities) => {
+        setNotifications(activities);
+      });
+
+      // Listen for new notifications
+      socket.on('addEventActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+      // Listen for new notifications
+      socket.on('deleteEventActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+   
+      socket.on('EditEventActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+      socket.on('createAlertActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+
+      socket.on('deleteAlertActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+
+      socket.on('editAlertActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+
+      socket.on('deletContactDetailsActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+
+      socket.on('deletContactHistoryActivity', (notification) => {
+        setNotifications((prevNotifications) => [
+          notification,
+          ...prevNotifications,
+        ]);
+      });
+
+
+      return () => {
+        socket.off('init-activities');
+        socket.off('addEventActivity');
+        socket.off('deleteEventActivity');
+      };
+    }
+  }, [socket]);
 
   useEffect(() => {
     getUser();
@@ -148,7 +219,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem,socket, setSocket}}>
+        <MyContext.Provider value={{ user, setUser, alert, setalert, message, setMessage ,selectedItem, setSelectedItem,view, setView,headerContent,setHeaderContent,selectedContactItem, setSelectedContactItem,selectedHistoryItem, setSelectedHistoryItem,socket, setSocket,notifications, setNotifications}}>
           {alert ? <AlertComponent /> : (
             <Routes>
               <Route path="/" element={user ? <Navigate to="/Dashboard" /> : <Navigate to="/login" />} />

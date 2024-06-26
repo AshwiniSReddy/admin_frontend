@@ -26,6 +26,11 @@ function Menubar() {
     const handleStateChange = (state) => {
         setMenuOpen(state.isOpen);
     };
+    const handleActivityFeed=()=>{
+        setView('Activity feed');
+        setHeaderContent(["Activity feed"])
+        setMenuOpen(false)
+    }
 
     return (
         <Menu isOpen={menuOpen} onStateChange={handleStateChange}>
@@ -34,7 +39,7 @@ function Menubar() {
                 <button onClick={handleAddClick} className='buttons'>Edit/Delete Alert</button>
                 <button onClick={() => {setView('Highlights');setHeaderContent(["Highlights","History"]);setMenuOpen(false);}} className='buttons'>Highlights</button>
                 <button onClick={handleContactDetailsClick} className='buttons'>Contact Details</button>
-               
+                <button onClick={handleActivityFeed} className='buttons'>Activity feed</button>
             </div>
         </Menu>
     );
