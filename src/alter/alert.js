@@ -15,7 +15,7 @@ function AlertComponent() {
     // Fetch the current alert message when the component mounts
     const fetchCurrentAlertMessage = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getAlert_test`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getAlert`);
             console.log(response.data)
             if (response.data && response.data.message) {
                 setPlaceholder(response.data.data.message); // Set the fetched message as placeholder
@@ -34,7 +34,7 @@ function AlertComponent() {
 
     const handleCreateOrUpdate = async () => {
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/createAlert_test`, {
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/alert`, {
                 message: newAlertMessage
             });
 
