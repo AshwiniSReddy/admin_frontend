@@ -8,7 +8,7 @@ import { socket } from '../socket/socket';
 
 const Records = ({ data ,detetebutton,handleRefresh}) => {
 //   const [selectedItem, setSelectedItem] = useState(null);
-  const { selectedItem, setSelectedItem} = useContext(MyContext);
+  const { selectedItem, setSelectedItem,user} = useContext(MyContext);
   const handleRowClick = (item) => {
     setSelectedItem(item);
   };
@@ -22,6 +22,20 @@ const Records = ({ data ,detetebutton,handleRefresh}) => {
     } catch (error) {
       console.error('Failed to delete the record:', error);
       console.log('Failed to delete the record');
+    }
+    const userId = user && user.given_name;
+    const eventId_test = 'event789';
+    const message = `${user && user.given_name} deleted contact`;
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContactHistoryActivity`, {
+        userId,
+        eventId_test,
+        message,
+      });
+      // alert('Event created and notification sent');
+    } catch (error) {
+      console.error('Error creating event:', error);
+      // alert('Failed to create event');
     }
 
   };

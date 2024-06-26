@@ -17,7 +17,7 @@ const UpcomingEvents = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/recentEvents_test`);
             setEvents(response.data); // Assuming response.data is the array of events
         } catch (error) {
             console.error('Error fetching events:', error);
@@ -44,7 +44,7 @@ const UpcomingEvents = () => {
 
     const handleDelete = async (eventId) => {
         try {
-            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/delete/${eventId}`);
+            await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/delete_test/${eventId}`);
             fetchEvents(); // Refresh the events list after deletion
             if (editingId === eventId) {
                 setEditingId(null); // Reset editing state if the deleted event was being edited
@@ -153,7 +153,7 @@ const UpcomingEvents = () => {
         }
 
         try {
-            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/edit/${eventId}`, data, {
+            const response = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/api/edit_test/${eventId}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
