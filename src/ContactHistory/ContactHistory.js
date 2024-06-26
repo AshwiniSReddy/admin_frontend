@@ -19,16 +19,10 @@ function ContactHistory() {
     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
     const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
     const nPages = Math.ceil(data.length / recordsPerPage);
-<<<<<<< HEAD
-    
-     
-=======
-
->>>>>>> b126f7cd9fb7317ee13dbc017ba4be065ced32ad
     useEffect(() => {
         const fetchSubmissions = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getContactdetails_test`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/form-history`);
                 setData(response.data);
                 dataRef.current = response.data;
             } catch (error) {
@@ -40,11 +34,6 @@ function ContactHistory() {
 
         fetchSubmissions();
     }, [refresh]);
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> b126f7cd9fb7317ee13dbc017ba4be065ced32ad
     useEffect(() => {
         const handleRecordDeleted = (deletedRecordId) => {
             const updatedData = dataRef.current.filter(item => item._id !== deletedRecordId);

@@ -7,11 +7,7 @@ import DetailComponent from '../DetailComponent/DetailComponent';
 import { socket } from '../socket/socket';
 
 function Contact() {
-<<<<<<< HEAD
-    const { selectedItem,setSelectedItem,user} = useContext(MyContext);
-=======
     const { selectedItem, setSelectedItem, user } = useContext(MyContext);
->>>>>>> b126f7cd9fb7317ee13dbc017ba4be065ced32ad
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +22,7 @@ function Contact() {
     useEffect(() => {
         const fetchSubmissions = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getContactdetails_test`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/get-form-submissions`);
                 setData(response.data);
                 dataRef.current = response.data;
             } catch (error) {
@@ -41,16 +37,6 @@ function Contact() {
         const handleContactRemoved = (contactId) => {
             const updatedData = dataRef.current.filter(item => item._id !== contactId);
             setData(updatedData);
-<<<<<<< HEAD
-        });
-    }, []);
-    useEffect(() => {
-        socket.off('contact_removed');
-        return () => setSelectedItem(null); // Cleanup function to reset on component unmount
-      }, []);
-    
-      const handleItemContacted = (id) => {
-=======
             dataRef.current = updatedData;
         };
 
@@ -63,7 +49,6 @@ function Contact() {
     }, [setSelectedItem]);
 
     const handleItemContacted = (id) => {
->>>>>>> b126f7cd9fb7317ee13dbc017ba4be065ced32ad
         const updatedData = data.filter(item => item._id !== id);
         setData(updatedData);
         dataRef.current = updatedData;
@@ -74,18 +59,7 @@ function Contact() {
             {loading ? (
                 <p>Loading...</p>
             ) : selectedItem ? (
-<<<<<<< HEAD
                 <DetailComponent selectedItem={selectedItem} setSelectedItem={setSelectedItem} showContactedButton={true} detetebutton={false} onItemContacted={handleItemContacted} user={user}/>
-=======
-                <DetailComponent
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    showContactedButton={true}
-                    detetebutton={false}
-                    onItemContacted={handleItemContacted}
-                    user={user}
-                />
->>>>>>> b126f7cd9fb7317ee13dbc017ba4be065ced32ad
             ) : (
                 <>
                     <Records data={currentRecords} />

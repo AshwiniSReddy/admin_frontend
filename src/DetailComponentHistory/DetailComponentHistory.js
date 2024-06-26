@@ -11,7 +11,7 @@ const DetailComponentHistory = ({ selectedItem, setSelectedItem,showContactedBut
   const handleContactedClick = async () => {
     try {
    
-      const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContactHistory_test/${selectedItem._id}`);
+      const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/deleteContact-upadate-in-history/${selectedItem._id}`);
       console.log(response.data);
       setSelectedItem(null); // Optionally remove the selected item from the UI state
       console.log('Contact has been archived and deleted!');
