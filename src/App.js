@@ -126,14 +126,13 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
     const newSocket = io(process.env.REACT_APP_BACKEND_URL, {
-      path: '/socket.io/',
       transports: ['websocket', 'polling'] // Ensure both transports are supported
     });
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
   
- 
+ //fjkefk
 
   const getUser = async () => {
     try {
